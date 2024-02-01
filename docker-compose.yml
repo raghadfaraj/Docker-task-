@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+
+
+  webapp:
+    build: .
+    environment:
+      PROD_DB_USER: postgres
+      PROD_DB_PASSWORD: postgres
+      PROD_DB_NAME: postgres
+      PROD_DB_HOST: db
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5342
+    volumes:
+      - ./initial_db:/docker-entrypoint-initdb.d
